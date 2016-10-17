@@ -1,0 +1,84 @@
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="ivan.osago.ui.ContentFragment">
+
+    <TextView
+        android:text="Дата расторжения"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cancellation_date_label" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cancellation_date_field"
+        android:textSize="18dp"
+        android:text="test"
+        android:gravity="center_horizontal" />
+
+    <TextView
+        android:text="Дата начало полиса"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/policy_beginning_label" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/policy_beginning_field"
+        android:textSize="18dp"
+        android:text="test"
+        android:gravity="center_horizontal" />
+
+    <TextView
+        android:text="Срок страхования"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/term_insurance_spinner"
+        android:spinnerMode="dialog"
+        android:entries="@array/term_insurance_array_entires"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:ems="10"
+        android:id="@+id/amount_nsurance_field"
+        android:hint="Сумма страхования" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/policy_number_field"
+        android:hint="Номер полиса" />
+
+    <Button
+        android:text="Подсчитать"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/calculate_button" />
+
+    <Button
+        android:text="Запрос"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/request_button" />
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/networkImageView"
+        android:layout_width="150dp"
+        android:layout_height="170dp"
+        android:layout_centerHorizontal="true" />
+
+</LinearLayout>
+
