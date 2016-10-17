@@ -9,6 +9,7 @@ import java.util.Calendar;
 
 import ivan.osago.R;
 import ivan.osago.calculator.Calculator;
+import ivan.osago.network.Request;
 import ivan.osago.network.VolleySingletone;
 
 /**
@@ -60,6 +61,10 @@ public class PresemterImplemention implements Presenter, DatePickerDialog.OnDate
                 break;
             case Presenter.SELECT_SECOND_DATE:
                 createDialog("begin");
+                break;
+            case Presenter.CHECK_DATE:
+                Request request = new Request(view.getActivity());
+                request.request("http://dkbm-web.autoins.ru/dkbm-web-1.0/osagovehicle.htm");
                 break;
             default:
         }

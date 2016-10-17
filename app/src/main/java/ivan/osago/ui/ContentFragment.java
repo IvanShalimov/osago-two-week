@@ -1,6 +1,7 @@
 package ivan.osago.ui;
 
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -22,12 +24,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ivan.osago.R;
+import ivan.osago.network.DaaRequest;
+import ivan.osago.network.Request;
 import ivan.osago.network.VolleySingletone;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ContentFragment extends Fragment implements ivan.osago.ui.View {
+public class ContentFragment extends Fragment implements ivan.osago.ui.View,Request.Callback {
 
     Presenter presenter;
     @BindView(R.id.cancellation_date_field)
@@ -43,9 +47,13 @@ public class ContentFragment extends Fragment implements ivan.osago.ui.View {
     @BindView(R.id.calculate_button)
     Button calculateButton;
     @BindView(R.id.networkImageView)
-    com.android.volley.toolbox.NetworkImageView imageView;
+    ImageView imageView;
     @BindView(R.id.request_button)
     Button requestButton;
+    @BindView(R.id.date_button)
+    Button data_button;
+    @BindView(R.id.сaptcha)
+    EditText captcha;
 
     public ContentFragment() {
         // Required empty public constructor
@@ -57,6 +65,7 @@ public class ContentFragment extends Fragment implements ivan.osago.ui.View {
         View view = inflater.inflate(R.layout.fragment_content, container, false);
         ButterKnife.bind(this,view);
         presenter = new PresemterImplemention(this, new ModelImplementation());
+        getSessionId();
         return view;
     }
 
@@ -94,6 +103,12 @@ public class ContentFragment extends Fragment implements ivan.osago.ui.View {
     }
 
     @Override
+    public void getSessionId() {
+        presenter.onClick(Presenter.CHECK_DATE);
+    }
+
+
+    @Override
     public void setBeginText(String text) {
         policyBeginningField.setText(text);
         policyBeginningField.setTextColor(Color.BLACK);
@@ -102,19 +117,15 @@ public class ContentFragment extends Fragment implements ivan.osago.ui.View {
     @OnClick(R.id.calculate_button)
     @Override
     public void calculate(android.view.View view) {
-
         presenter.onClick(Presenter.CALCULATE_CLICK);
     }
 
     @OnClick(R.id.request_button)
     @Override
     public void sendRequest(android.view.View view) {
-        presenter.onClick(Presenter.REQUEST_CLICK);
-        ImageLoader mImageLoader = VolleySingletone.getInstance(getActivity()).getImageLoader();
-/*        mImageLoader.get("http://dkbm-web.autoins.ru/dkbm-web-1.0/simpleCaptcha.png",
-                ImageLoader.getImageListener(imageView,
-                        R.drawable.ic_menu_gallery, R.drawable.ic_menu_share));*/
-        imageView.setImageUrl("http://dkbm-web.autoins.ru/dkbm-web-1.0/simpleCaptcha.png", mImageLoader);
+        Request request = new Request(getActivity());
+        request.setCallback(this);
+        request.executeImageRequest("http://dkbm-web.autoins.ru/dkbm-web-1.0/simpleCaptcha.png");
     }
 
     @OnClick({R.id.cancellation_date_field, R.id.policy_beginning_field})
@@ -133,5 +144,16 @@ public class ContentFragment extends Fragment implements ivan.osago.ui.View {
     @Override
     public void showDialog(DatePickerDialog dialog, String type) {
         dialog.show(getFragmentManager(), type);
+    }
+
+    @Override
+    public void setImage(Bitmap bitmap) {
+        imageView.setImageBitmap(bitmap);
+    }
+    @OnClick(R.id.date_button)
+    void clickDataButton(){
+        DaaRequest request = new DaaRequest(getActivity());
+        request.request("http://dkbm-web.autoins.ru/dkbm-web-1.0/osagovehicle.htm",
+                captcha.getText().toString());
     }
 }

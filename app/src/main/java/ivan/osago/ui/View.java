@@ -30,4 +30,6 @@ public interface View {
     String getTermInsurace();
 
     String getSumInsurance();
+
+    void getSessionId();
 }

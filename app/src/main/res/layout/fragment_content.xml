@@ -70,15 +70,29 @@
         android:id="@+id/calculate_button" />
 
     <Button
-        android:text="Запрос"
+        android:text="Получить капчу"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/request_button" />
-    <com.android.volley.toolbox.NetworkImageView
+    <ImageView
         android:id="@+id/networkImageView"
-        android:layout_width="150dp"
-        android:layout_height="170dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/сaptcha"
+        android:hint="Капча" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/date_button"
+        android:text="сведений о транспортном средстве" />
 
 </LinearLayout>
 
