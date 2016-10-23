@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,18 +14,14 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.android.volley.toolbox.ImageLoader;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
-
-import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ivan.osago.R;
-import ivan.osago.network.DaaRequest;
+import ivan.osago.network.DataRequest;
 import ivan.osago.network.Request;
-import ivan.osago.network.VolleySingletone;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -152,7 +147,7 @@ public class ContentFragment extends Fragment implements ivan.osago.ui.View,Requ
     }
     @OnClick(R.id.date_button)
     void clickDataButton(){
-        DaaRequest request = new DaaRequest(getActivity());
+        DataRequest request = new DataRequest(getActivity());
         request.request("http://dkbm-web.autoins.ru/dkbm-web-1.0/osagovehicle.htm",
                 captcha.getText().toString());
     }

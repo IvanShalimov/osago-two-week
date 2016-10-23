@@ -16,10 +16,10 @@ import ivan.osago.Application;
  * Created by ivan on 17.10.16.
  */
 
-public class DaaRequest {
+public class DataRequest {
 
     Context context;
-    public DaaRequest(Context context){
+    public DataRequest(Context context){
         this.context = context;
     }
 
