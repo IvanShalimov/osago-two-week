@@ -46,14 +46,23 @@ public class PresenterImplementation implements Presenter, DatePickerDialog.OnDa
     public void onClick(int type) {
         switch (type){
             case Presenter.CALCULATE_CLICK:
-                calculator.setAmount(view.getSumInsurance());
-                calculator.setBeginDate(view.getBeginDate());
-                calculator.setCancelDate(view.getCancelledDate());
-                calculator.setTermInsurance(view.getTermInsurance());
+                if(!view.getSumInsurance().equals("")){
+                    calculator.setAmount(view.getSumInsurance());
+                    calculator.setBeginDate(view.getBeginDate());
+                    calculator.setCancelDate(view.getCancelledDate());
+                    calculator.setTermInsurance(view.getTermInsurance());
 
-                Application.getInstancce().setNumberOsago(view.getNumberOsago());
-                Application.getInstancce().setSerialOsago(view.getSerialOsago());
-                Application.getInstancce().setResult(calculator.calculate());
+                    if (!view.getNumberOsago().equals("")){
+                        Application.getInstancce().setNumberOsago(view.getNumberOsago());
+                        Application.getInstancce().setSerialOsago(view.getSerialOsago());
+                        Application.getInstancce().setResult(calculator.calculate());
+                    }
+                    else
+                        view.setTextErrorOsagoNumber("Введите номер ОСАГО");
+                }
+                else
+                    view.setTextErrorSummyInsurance("Введите сумму");
+
                 break;
             case Presenter.REQUEST_CLICK:
 

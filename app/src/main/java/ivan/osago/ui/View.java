@@ -35,4 +35,8 @@ public interface View {
     String getSerialOsago();
 
     void getSessionId();
+
+    void setTextErrorOsagoNumber(String textError);
+
+    void setTextErrorSummyInsurance(String textError);
 }

@@ -2,11 +2,17 @@ package ivan.osago.network;
 
 import android.content.Context;
 import android.util.Log;
-
+import static java.nio.charset.StandardCharsets.*;
 import com.android.volley.*;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 
+import org.joda.time.DateTime;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,8 +25,14 @@ import ivan.osago.Application;
 public class DataRequest {
 
     Context context;
+    Callback callback;
     public DataRequest(Context context){
         this.context = context;
+    }
+
+    public DataRequest(Context context,Callback callback){
+        this.context = context;
+        this.callback = callback;
     }
 
     public void request(String url, final String captcha){
@@ -30,7 +42,19 @@ public class DataRequest {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-Log.d("Test",""+response);
+
+                        if(callback != null){
+                            String utfString = null;
+
+                            try {
+                                utfString = new String(response.getBytes("ISO-8859-1"), "UTF-8");
+                            } catch (UnsupportedEncodingException e) {
+                                e.printStackTrace();
+                            }
+
+                            Log.d("Test",""+utfString);
+                            callback.handleResult(utfString);
+                        }
                     }
 
                 }, new Response.ErrorListener() {
@@ -47,7 +71,7 @@ Log.d("Test",""+response);
                 mHeaders.put("Accept","application/json");
                 mHeaders.put("Accept-Language","en-US,en;q=0.5");
                 mHeaders.put("Accept-Encoding","gzip, deflate");
-                mHeaders.put("X-Requested_With","XMLHttpRequest");
+                mHeaders.put("X-Requested-With","XMLHttpRequest");
                 mHeaders.put("Connection","keep-alive");
                 mHeaders.put("Referer","http://dkbm-web.autoins.ru/dkbm-web-1.0/osagovehicle.htm");
                 return mHeaders;
@@ -56,9 +80,13 @@ Log.d("Test",""+response);
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> mParams = new HashMap<>();
-                mParams.put("serialOsago","ЕЕЕ");
-                mParams.put("numberOsago","0387045187");
-                mParams.put("dateRequest","17.10.2016");Log.d("Test",captcha);
+                mParams.put("serialOsago",Application.getInstancce().getSerialOsago());
+                mParams.put("numberOsago",Application.getInstancce().getNumberOsago());
+                DateTime dateTime = new DateTime();
+                mParams.put("dateRequest",dateTime.getDayOfMonth()+"."+dateTime.getMonthOfYear()+"."+
+                        dateTime.getYear());
+
+                Log.d("Test",captcha);
                 mParams.put("answer",""+captcha);
                 return mParams;
             }
@@ -66,5 +94,9 @@ Log.d("Test",""+response);
 
 
         VolleySingletone.getInstance(context).addToRequestQueue(stringRequest);
+    }
+
+    public interface Callback{
+        void handleResult(String result);
     }
 }

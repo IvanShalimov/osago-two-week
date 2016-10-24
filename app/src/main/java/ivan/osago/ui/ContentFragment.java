@@ -1,10 +1,12 @@
 package ivan.osago.ui;
 
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +28,7 @@ import ivan.osago.network.Request;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ContentFragment extends Fragment implements ivan.osago.ui.View {
+public class ContentFragment extends Fragment implements ivan.osago.ui.View,CaptchaDialog.HandleCallbac {
 
     public static final String CAPTCHA_DIALOG_TAG = "CAPTCHA_DIALOG";
     Presenter presenter;
@@ -46,6 +48,10 @@ public class ContentFragment extends Fragment implements ivan.osago.ui.View {
     Spinner serialOsago;
     @BindView(R.id.calculate_button)
     Button calculateButton;
+    @BindView(R.id.osago_number_input)
+    android.support.design.widget.TextInputLayout osagoNumberInput;
+    @BindView(R.id.summa_insurance_input)
+    android.support.design.widget.TextInputLayout summaInsuranceInput;
 
     public ContentFragment() {
         // Required empty public constructor
@@ -59,6 +65,15 @@ public class ContentFragment extends Fragment implements ivan.osago.ui.View {
         presenter = new PresenterImplementation(this, new ModelImplementation());
 
         getSessionId();
+
+        policeNumberField.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if(keyCode == 66) {
+                    amountInsuranceField.requestFocus();
+                }
+                return false;
+            }
+        });
         return view;
     }
 
@@ -123,16 +138,33 @@ public class ContentFragment extends Fragment implements ivan.osago.ui.View {
         presenter.onClick(Presenter.CHECK_DATE);
     }
 
+    @Override
+    public void setTextErrorOsagoNumber(String textError) {
+        osagoNumberInput.setError(textError);
+    }
+
+    @Override
+    public void setTextErrorSummyInsurance(String textError) {
+        summaInsuranceInput.setError(textError);
+    }
 
 
-//Здесь запоминаетс нужное и выводится капчка диалог
+    //Здесь запоминаетс нужное и выводится капчка диалог
     @OnClick(R.id.calculate_button)
     @Override
     public void calculate(android.view.View view) {
+        summaInsuranceInput.setError(null);
+        osagoNumberInput.setError(null);
+
         presenter.onClick(Presenter.CALCULATE_CLICK);
 
-        dialog = new CaptchaDialog();
-        dialog.show(getFragmentManager(), CAPTCHA_DIALOG_TAG);
+        if(!getSumInsurance().equals("") && !getNumberOsago().equals("")){
+            dialog = new CaptchaDialog();
+            dialog.setHandleCallbac(this);
+            dialog.show(getFragmentManager(), CAPTCHA_DIALOG_TAG);
+
+        }
+
     }
 
 
@@ -153,5 +185,37 @@ public class ContentFragment extends Fragment implements ivan.osago.ui.View {
     @Override
     public void showDialog(DatePickerDialog dialog, String type) {
         dialog.show(getFragmentManager(), type);
+    }
+
+    @Override
+    public void handle(String result) {
+        Intent intent = new Intent(getActivity(),ivan.osago.ui.ResultActivity.class);
+        intent.putExtra("result",result);
+        getActivity().startActivity(intent);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("number_osago",getNumberOsago());
+        outState.putString("sum",getSumInsurance());
+        outState.putString("begin_date",getBeginDate());
+        outState.putString("cancel_date",getCancelledDate());
+        outState.putInt("serial_osago",serialOsago.getSelectedItemPosition());
+        outState.putInt("srok",termInsuranceSpinner.getSelectedItemPosition());
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if(savedInstanceState != null){
+            policeNumberField.setText(savedInstanceState.getString("number_osago"));
+            amountInsuranceField.setText(savedInstanceState.getString("sum"));
+            policyBeginningField.setText(savedInstanceState.getString("begin_date"));
+            canceletionDateField.setText(savedInstanceState.getString("cancel_date"));
+
+            serialOsago.setSelection(savedInstanceState.getInt("serial_osago"));
+            termInsuranceSpinner.setSelection(savedInstanceState.getInt("srok"));
+        }
     }
 }

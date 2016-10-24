@@ -29,4 +29,6 @@
         <item>ССС</item>
         <item>BBB</item>
     </string-array>
+    <string name="title_activity_result">Результат</string>
+    <string name="title_activity_settings">Настройки</string>
 </resources>

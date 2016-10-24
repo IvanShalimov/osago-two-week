@@ -1,12 +1,14 @@
 package ivan.osago.ui;
 
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.Map;
 
+import ivan.osago.Application;
 import ivan.osago.R;
 import ivan.osago.network.DataRequest;
 import ivan.osago.network.Request;
@@ -22,7 +25,8 @@ import ivan.osago.network.Request;
 /**
  * Created by ivan on 23.10.16.
  */
-public class CaptchaDialog extends DialogFragment implements View.OnClickListener, Request.Callback{
+public class CaptchaDialog extends DialogFragment implements View.OnClickListener, Request.Callback
+, DataRequest.Callback{
 
     public static final int IMAGE_REQUEST = 0;
     public static final int SUCCESS_REQUEST = 1;
@@ -33,6 +37,17 @@ public class CaptchaDialog extends DialogFragment implements View.OnClickListene
     ImageView captcha,refresh_captcha;
     EditText captchaField;
     Button okButton,cancelButton;
+    android.support.design.widget.TextInputLayout textInput;
+
+    public HandleCallbac getHandleCallbac() {
+        return handleCallbac;
+    }
+
+    public void setHandleCallbac(HandleCallbac handleCallbac) {
+        this.handleCallbac = handleCallbac;
+    }
+
+    HandleCallbac handleCallbac;
 
     public void setParams(Map<String, String> params) {
         this.params = params;
@@ -43,13 +58,16 @@ public class CaptchaDialog extends DialogFragment implements View.OnClickListene
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         View root = inflater.inflate(R.layout.captcha_dialog_layout, container, false);
         title = (TextView)root.findViewById(R.id.title_dialog);
+        title.setText("Подтверждение кода безопасности");
         captcha = (ImageView)root.findViewById(R.id.captcha);
         refresh_captcha = (ImageView)root.findViewById(R.id.refresh_captcha);
         captchaField = (EditText)root.findViewById(R.id.captcha_field);
         okButton = (Button)root.findViewById(R.id.ok_button);
         cancelButton = (Button)root.findViewById(R.id.cancel_button);
+        textInput = (android.support.design.widget.TextInputLayout)root.findViewById(R.id.captcha_field_input);
 
         okButton.setOnClickListener(this);
         cancelButton.setOnClickListener(this);
@@ -69,9 +87,14 @@ public class CaptchaDialog extends DialogFragment implements View.OnClickListene
                 request.executeImageRequest(URL_IMAGE);
                 break;
             case SUCCESS_REQUEST:
-                DataRequest requestData = new DataRequest(getActivity());
-                requestData.request(DATA_REQUEST,
-                        captchaField.getText().toString());
+                if(!captchaField.getText().toString().equals("")){
+                    textInput.setError(null);
+                    DataRequest requestData = new DataRequest(getActivity(),this);
+                    requestData.request(DATA_REQUEST,
+                    captchaField.getText().toString());
+                } else
+                    textInput.setError("Пустое поле");
+
                 break;
         }
     }
@@ -95,5 +118,16 @@ public class CaptchaDialog extends DialogFragment implements View.OnClickListene
     @Override
     public void setImage(Bitmap bitmap) {
         captcha.setImageBitmap(bitmap);
+    }
+
+    @Override
+    public void handleResult(String result) {
+        if(handleCallbac != null){
+            handleCallbac.handle(result);
+        }
+    }
+
+    public interface HandleCallbac {
+        void handle(String result);
     }
 }

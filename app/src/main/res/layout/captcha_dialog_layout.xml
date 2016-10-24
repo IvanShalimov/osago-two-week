@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -38,7 +39,9 @@
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:errorEnabled="true"
+        android:id="@+id/captcha_field_input">
 
         <EditText
             android:layout_width="match_parent"
@@ -46,7 +49,7 @@
             android:hint="@string/captcha_help"
             android:id="@+id/captcha_field"
             tools:ignore="HardcodedText"
-            android:inputType="numberDecimal" />
+            android:inputType="text" />
 
     </android.support.design.widget.TextInputLayout>
 
