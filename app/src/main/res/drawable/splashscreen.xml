@@ -3,9 +3,11 @@
     <item
         android:drawable="@color/splashscreen_color_background"/>
 
-    <item>
+    <item
+        >
         <bitmap
             android:gravity="center"
-            android:src="@drawable/splashscreen_icon"/>
+            android:src="@drawable/splashscreen_icon"
+            />
     </item>
 </layer-list>
