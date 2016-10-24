@@ -11,7 +11,6 @@ public interface View {
 
     void calculate(android.view.View view);
 
-    void sendRequest(android.view.View view);
 
     void selectDate(android.view.View view);
 
@@ -25,11 +24,15 @@ public interface View {
 
     String getCancelledDate();
 
-    String getBeginnDate();
+    String getBeginDate();
 
-    String getTermInsurace();
+    String getTermInsurance();
 
     String getSumInsurance();
+
+    String getNumberOsago();
+
+    String getSerialOsago();
 
     void getSessionId();
 }

@@ -2,33 +2,34 @@ package ivan.osago.ui;
 
 import android.util.Log;
 
-import com.android.volley.toolbox.ImageLoader;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
+import org.joda.time.DateTime;
 
 import java.util.Calendar;
 
-import ivan.osago.R;
+import ivan.osago.Application;
 import ivan.osago.calculator.Calculator;
 import ivan.osago.network.Request;
-import ivan.osago.network.VolleySingletone;
 
 /**
  * Created by ivan on 15.10.16.
  */
-public class PresemterImplemention implements Presenter, DatePickerDialog.OnDateSetListener{
+public class PresenterImplementation implements Presenter, DatePickerDialog.OnDateSetListener{
 
     private Calculator calculator;
     View view;
     Model model;
 
-    public PresemterImplemention(View view, Model model) {
+    public PresenterImplementation(View view, Model model) {
         this.view = view;
         this.model = model;
         calculator = new Calculator();
 
-        Calendar calendar = Calendar.getInstance();
-        String date = calendar.get(Calendar.DAY_OF_MONTH)+"."+calendar.get(Calendar.MONTH)+"."+
-                calendar.get(Calendar.YEAR);
+        DateTime calendare = new DateTime();
+
+        String date = calendare.getDayOfMonth()+"."+calendare.getMonthOfYear()+"."+
+                calendare.getYear();
 
         this.view.setBeginText(date);
         this.view.setCancelText(date);
@@ -46,14 +47,15 @@ public class PresemterImplemention implements Presenter, DatePickerDialog.OnDate
         switch (type){
             case Presenter.CALCULATE_CLICK:
                 calculator.setAmount(view.getSumInsurance());
-                calculator.setBeginDate(view.getBeginnDate());
+                calculator.setBeginDate(view.getBeginDate());
                 calculator.setCancelDate(view.getCancelledDate());
-                calculator.setTermInsurance(view.getTermInsurace());
-                double result = calculator.calculate();
-                Log.d("Test",""+result);
+                calculator.setTermInsurance(view.getTermInsurance());
+
+                Application.getInstancce().setNumberOsago(view.getNumberOsago());
+                Application.getInstancce().setSerialOsago(view.getSerialOsago());
+                Application.getInstancce().setResult(calculator.calculate());
                 break;
             case Presenter.REQUEST_CLICK:
-
 
                 break;
             case Presenter.SELECT_FIRST_DATE:

@@ -26,9 +26,12 @@ import ivan.osago.network.Request;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ContentFragment extends Fragment implements ivan.osago.ui.View,Request.Callback {
+public class ContentFragment extends Fragment implements ivan.osago.ui.View {
 
+    public static final String CAPTCHA_DIALOG_TAG = "CAPTCHA_DIALOG";
     Presenter presenter;
+    CaptchaDialog dialog;
+
     @BindView(R.id.cancellation_date_field)
     TextView canceletionDateField;
     @BindView(R.id.policy_beginning_field)
@@ -39,16 +42,10 @@ public class ContentFragment extends Fragment implements ivan.osago.ui.View,Requ
     EditText policeNumberField;
     @BindView(R.id.term_insurance_spinner)
     Spinner termInsuranceSpinner;
+    @BindView(R.id.serial_osago)
+    Spinner serialOsago;
     @BindView(R.id.calculate_button)
     Button calculateButton;
-    @BindView(R.id.networkImageView)
-    ImageView imageView;
-    @BindView(R.id.request_button)
-    Button requestButton;
-    @BindView(R.id.date_button)
-    Button data_button;
-    @BindView(R.id.сaptcha)
-    EditText captcha;
 
     public ContentFragment() {
         // Required empty public constructor
@@ -59,7 +56,8 @@ public class ContentFragment extends Fragment implements ivan.osago.ui.View,Requ
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_content, container, false);
         ButterKnife.bind(this,view);
-        presenter = new PresemterImplemention(this, new ModelImplementation());
+        presenter = new PresenterImplementation(this, new ModelImplementation());
+
         getSessionId();
         return view;
     }
@@ -70,24 +68,34 @@ public class ContentFragment extends Fragment implements ivan.osago.ui.View,Requ
         presenter.onDestroy();
     }
 
+    //сеторы полей
+
     @Override
     public void setCancelText(String text) {
         canceletionDateField.setText(text);
         canceletionDateField.setTextColor(Color.BLACK);
     }
 
+    //здесь отсавить начальной дат отрисовку
+    @Override
+    public void setBeginText(String text) {
+        policyBeginningField.setText(text);
+        policyBeginningField.setTextColor(Color.BLACK);
+    }
+
+    //гетеры полей
     @Override
     public String getCancelledDate() {
         return canceletionDateField.getText().toString();
     }
 
     @Override
-    public String getBeginnDate() {
+    public String getBeginDate() {
         return policyBeginningField.getText().toString();
     }
 
     @Override
-    public String getTermInsurace() {
+    public String getTermInsurance() {
         String[] array = getResources().getStringArray(R.array.term_insurance_array_entires);
         return array[termInsuranceSpinner.getSelectedItemPosition()];
     }
@@ -98,31 +106,37 @@ public class ContentFragment extends Fragment implements ivan.osago.ui.View,Requ
     }
 
     @Override
+    public String getNumberOsago() {
+        return policeNumberField.getText().toString();
+    }
+
+    @Override
+    public String getSerialOsago() {
+        String[] array = getResources().getStringArray(R.array.serial_policy_array_entires);
+        return array[serialOsago.getSelectedItemPosition()];
+    }
+
+
+    //получение ссесион айдишника
+    @Override
     public void getSessionId() {
         presenter.onClick(Presenter.CHECK_DATE);
     }
 
 
-    @Override
-    public void setBeginText(String text) {
-        policyBeginningField.setText(text);
-        policyBeginningField.setTextColor(Color.BLACK);
-    }
 
+//Здесь запоминаетс нужное и выводится капчка диалог
     @OnClick(R.id.calculate_button)
     @Override
     public void calculate(android.view.View view) {
         presenter.onClick(Presenter.CALCULATE_CLICK);
+
+        dialog = new CaptchaDialog();
+        dialog.show(getFragmentManager(), CAPTCHA_DIALOG_TAG);
     }
 
-    @OnClick(R.id.request_button)
-    @Override
-    public void sendRequest(android.view.View view) {
-        Request request = new Request(getActivity());
-        request.setCallback(this);
-        request.executeImageRequest("http://dkbm-web.autoins.ru/dkbm-web-1.0/simpleCaptcha.png");
-    }
 
+//показывать дату тоже здесь ДАТА
     @OnClick({R.id.cancellation_date_field, R.id.policy_beginning_field})
     @Override
     public void selectDate(android.view.View view) {
@@ -139,17 +153,5 @@ public class ContentFragment extends Fragment implements ivan.osago.ui.View,Requ
     @Override
     public void showDialog(DatePickerDialog dialog, String type) {
         dialog.show(getFragmentManager(), type);
-    }
-
-    @Override
-    public void setImage(Bitmap bitmap) {
-        imageView.setImageBitmap(bitmap);
-    }
-
-    @OnClick(R.id.date_button)
-    void clickDataButton(){
-        DataRequest request = new DataRequest(getActivity());
-        request.request("http://dkbm-web.autoins.ru/dkbm-web-1.0/osagovehicle.htm",
-                captcha.getText().toString());
     }
 }

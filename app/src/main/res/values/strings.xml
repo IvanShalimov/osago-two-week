@@ -22,4 +22,11 @@
         <item>9</item>
         <item>12</item>
     </string-array>
+
+    <string-array name="serial_policy_array_entires">
+        <item>ЕЕЕ</item>
+        <item>ХХХ</item>
+        <item>ССС</item>
+        <item>BBB</item>
+    </string-array>
 </resources>

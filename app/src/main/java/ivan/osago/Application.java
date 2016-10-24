@@ -9,6 +9,35 @@ import android.util.Log;
 public class Application extends android.app.Application {
     private String phpSessionId;
     static Application mInstance;
+    private String serialOsago;
+
+    public double getResult() {
+        return result;
+    }
+
+    public void setResult(double result) {
+        this.result = result;
+    }
+
+    private double result;
+
+    public String getNumberOsago() {
+        return numberOsago;
+    }
+
+    public void setNumberOsago(String numberOsago) {
+        this.numberOsago = numberOsago;
+    }
+
+    public String getSerialOsago() {
+        return serialOsago;
+    }
+
+    public void setSerialOsago(String serialOsago) {
+        this.serialOsago = serialOsago;
+    }
+
+    private String numberOsago;
 
     public static Application getInstancce(){
         if (mInstance == null) {

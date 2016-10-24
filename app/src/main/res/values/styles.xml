@@ -24,4 +24,9 @@
     <style name="MyButton" parent="Theme.AppCompat.Light">
         <item name="colorControlHighlight">@color/yellow</item>
     </style>
+
+    <style name="MyButtonRaised" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/yellow_dark</item>
+        <item name="colorButtonNormal">@color/yellow</item>
+    </style>
 </resources>

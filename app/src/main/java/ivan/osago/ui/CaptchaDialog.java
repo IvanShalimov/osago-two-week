@@ -12,6 +12,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import ivan.osago.R;
 import ivan.osago.network.DataRequest;
 import ivan.osago.network.Request;
@@ -25,12 +28,17 @@ public class CaptchaDialog extends DialogFragment implements View.OnClickListene
     public static final int SUCCESS_REQUEST = 1;
     public static final String URL_IMAGE = "http://dkbm-web.autoins.ru/dkbm-web-1.0/simpleCaptcha.png";
     public static final String DATA_REQUEST = "http://dkbm-web.autoins.ru/dkbm-web-1.0/osagovehicle.htm";
+
     TextView title;
     ImageView captcha,refresh_captcha;
     EditText captchaField;
     Button okButton,cancelButton;
 
-    Bitmap image;
+    public void setParams(Map<String, String> params) {
+        this.params = params;
+    }
+
+    Map<String,String> params;
 
     @Nullable
     @Override
@@ -72,7 +80,8 @@ public class CaptchaDialog extends DialogFragment implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.ok_button:
-
+                request(SUCCESS_REQUEST);
+                dismiss();
                 break;
             case R.id.cancel_button:
                 dismiss();
