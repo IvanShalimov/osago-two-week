@@ -145,6 +145,7 @@ public class ContentFragment extends Fragment implements ivan.osago.ui.View,Requ
     public void setImage(Bitmap bitmap) {
         imageView.setImageBitmap(bitmap);
     }
+
     @OnClick(R.id.date_button)
     void clickDataButton(){
         DataRequest request = new DataRequest(getActivity());
