@@ -39,4 +39,5 @@ public interface View {
     void setTextErrorOsagoNumber(String textError);
 
     void setTextErrorSummyInsurance(String textError);
+
 }

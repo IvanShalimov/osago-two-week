@@ -10,7 +10,16 @@ import org.joda.time.DateTime;
  */
 public class Calculator {
 
-    private final double RETENTION_FACTOR=0.5;
+    public float getRETENTION_FACTOR() {
+        return RETENTION_FACTOR;
+    }
+
+    public void setRETENTION_FACTOR(float RETENTION_FACTOR) {
+        this.RETENTION_FACTOR = RETENTION_FACTOR;
+    }
+
+    private float RETENTION_FACTOR=(float)0.5;
+
     DateTime cancelDate;
     DateTime beginDate;
     int amount;

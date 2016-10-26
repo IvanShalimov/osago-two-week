@@ -1,0 +1,195 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ivan.osago.ui.ContentFragment"
+    android:background="#ffffff">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/data_container"
+                android:layout_margin="5dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:text="Дата расторжения"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/cancellation_date_label"
+                        tools:ignore="HardcodedText"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_horizontal" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/cancellation_date_field"
+                        android:textSize="24sp"
+                        android:text="test"
+                        android:gravity="center_horizontal"
+                        tools:ignore="HardcodedText,SpUsage"
+                        android:layout_margin="5dp"
+                        android:textAllCaps="true"
+                        android:textStyle="normal|bold" />
+
+                    <TextView
+                        android:text="Дата начало полиса"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/policy_beginning_label"
+                        tools:ignore="HardcodedText"
+                        android:gravity="center_horizontal"
+                        android:layout_marginTop="5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/policy_beginning_field"
+                        android:textSize="24sp"
+                        android:text="test"
+                        android:gravity="center_horizontal"
+                        tools:ignore="HardcodedText,SpUsage"
+                        android:layout_margin="5dp"
+                        android:textAllCaps="true"
+                        android:textStyle="normal|bold" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:text="Срок страхования(в месяцах)"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView"
+                        tools:ignore="HardcodedText"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp" />
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/term_insurance_spinner"
+                        android:spinnerMode="dialog"
+                        android:entries="@array/term_insurance_array_entires"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginBottom="5dp"
+                        style="@style/Widget.AppCompat.Spinner"
+                        android:gravity="center_vertical|center_horizontal|start"
+                        android:foregroundGravity="center_horizontal"
+                        android:textAlignment="center" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/serial_osago"
+                        android:entries="@array/serial_policy_array_entires"
+                        android:layout_centerInParent="false"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
+                        style="@style/Widget.AppCompat.Spinner.DropDown"
+                        android:textAlignment="center" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_toRightOf="@+id/serial_osago"
+                        android:layout_toEndOf="@+id/serial_osago"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
+                        app:errorEnabled="true"
+                        android:id="@+id/osago_number_input">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPersonName|number"
+                            android:ems="10"
+                            android:id="@+id/policy_number_field"
+                            android:hint="Пример: 0387045187"
+                            tools:ignore="HardcodedText,TextFields" ><requestFocus /></EditText>
+
+                    </android.support.design.widget.TextInputLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp">
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:errorEnabled="true"
+                    android:id="@+id/summa_insurance_input">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberSigned"
+                        android:ems="10"
+                        android:id="@+id/amount_nsurance_field"
+                        android:hint="Сумма страхования"
+                        tools:ignore="HardcodedText" />
+                </android.support.design.widget.TextInputLayout>
+            </android.support.v7.widget.CardView>
+
+            <Button
+                android:text="Подсчитать"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/calculate_button"
+                tools:ignore="HardcodedText"
+                android:layout_margin="5dp"
+                android:theme="@style/MyButtonRaised"
+                android:textColor="#ffffff" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>
+

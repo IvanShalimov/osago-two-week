@@ -1,5 +1,7 @@
 package ivan.osago.ui;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
@@ -51,6 +53,10 @@ public class PresenterImplementation implements Presenter, DatePickerDialog.OnDa
                     calculator.setBeginDate(view.getBeginDate());
                     calculator.setCancelDate(view.getCancelledDate());
                     calculator.setTermInsurance(view.getTermInsurance());
+                    SharedPreferences preferences =
+                            PreferenceManager.getDefaultSharedPreferences(view.getActivity());
+                    float coef = preferences.getFloat("hold_koef", (float)0.5);
+                    calculator.setRETENTION_FACTOR(coef);
 
                     if (!view.getNumberOsago().equals("")){
                         Application.getInstancce().setNumberOsago(view.getNumberOsago());
