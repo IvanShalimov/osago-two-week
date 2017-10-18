@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="security_code">Подтверждение кода безопасности</string>
+    <string name="security_code">Результат подсчитан, хотите проверить серийный номер?</string>
     <string name="captcha_help">Введите символы с изображения</string>
 </resources>

@@ -30,13 +30,13 @@ public interface View {
 
     String getSumInsurance();
 
-    String getNumberOsago();
+/*    String getNumberOsago();
 
-    String getSerialOsago();
+    String getSerialOsago();*/
 
-    void getSessionId();
+  //  void getSessionId();
 
-    void setTextErrorOsagoNumber(String textError);
+/*    void setTextErrorOsagoNumber(String textError);*/
 
     void setTextErrorSummyInsurance(String textError);
 

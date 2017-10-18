@@ -58,13 +58,14 @@ public class PresenterImplementation implements Presenter, DatePickerDialog.OnDa
                     float coef = preferences.getFloat("hold_koef", (float)0.5);
                     calculator.setRETENTION_FACTOR(coef);
 
-                    if (!view.getNumberOsago().equals("")){
+/*                    if (!view.getNumberOsago().equals("")){
                         Application.getInstancce().setNumberOsago(view.getNumberOsago());
                         Application.getInstancce().setSerialOsago(view.getSerialOsago());
-                        Application.getInstancce().setResult(calculator.calculate());
+
                     }
                     else
-                        view.setTextErrorOsagoNumber("Введите номер ОСАГО");
+                        view.setTextErrorOsagoNumber("Введите номер ОСАГО");*/
+                    Application.getInstancce().setResult(calculator.calculate());
                 }
                 else
                     view.setTextErrorSummyInsurance("Введите сумму");
@@ -102,11 +103,11 @@ public class PresenterImplementation implements Presenter, DatePickerDialog.OnDa
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
         String type = view.getTag();
         if(type.equals("cancel")) {
-            this.view.setCancelText(dayOfMonth+"."+monthOfYear+"."+year);
+            this.view.setCancelText(dayOfMonth+"."+(monthOfYear-1)+"."+year);
             return;
         }
         if(type.equals("begin")){
-            this.view.setBeginText(dayOfMonth+"."+monthOfYear+"."+year);
+            this.view.setBeginText(dayOfMonth+"."+(monthOfYear-1)+"."+year);
         }
     }
 }

@@ -34,8 +34,9 @@ public class CaptchaDialog extends DialogFragment implements View.OnClickListene
     public static final String DATA_REQUEST = "http://dkbm-web.autoins.ru/dkbm-web-1.0/osagovehicle.htm";
 
     TextView title;
-    ImageView captcha,refresh_captcha;
-    EditText captchaField;
+    TextView result;
+/*    ImageView captcha,refresh_captcha;
+    EditText captchaField;*/
     Button okButton,cancelButton;
     android.support.design.widget.TextInputLayout textInput;
 
@@ -62,16 +63,18 @@ public class CaptchaDialog extends DialogFragment implements View.OnClickListene
         View root = inflater.inflate(R.layout.captcha_dialog_layout, container, false);
         title = (TextView)root.findViewById(R.id.title_dialog);
         title.setText("Подтверждение кода безопасности");
-        captcha = (ImageView)root.findViewById(R.id.captcha);
+/*        captcha = (ImageView)root.findViewById(R.id.captcha);
         refresh_captcha = (ImageView)root.findViewById(R.id.refresh_captcha);
-        captchaField = (EditText)root.findViewById(R.id.captcha_field);
+        captchaField = (EditText)root.findViewById(R.id.captcha_field);*/
         okButton = (Button)root.findViewById(R.id.ok_button);
         cancelButton = (Button)root.findViewById(R.id.cancel_button);
-        textInput = (android.support.design.widget.TextInputLayout)root.findViewById(R.id.captcha_field_input);
+       // textInput = (android.support.design.widget.TextInputLayout)root.findViewById(R.id.captcha_field_input);
+        result = (TextView) root.findViewById(R.id.result_text);
+        result.setText("Результат: "+Application.getInstancce().getResult()+" RUB");
 
         okButton.setOnClickListener(this);
         cancelButton.setOnClickListener(this);
-        refresh_captcha.setOnClickListener(this);
+        //refresh_captcha.setOnClickListener(this);
 
         request(IMAGE_REQUEST);
 
@@ -87,13 +90,14 @@ public class CaptchaDialog extends DialogFragment implements View.OnClickListene
                 request.executeImageRequest(URL_IMAGE);
                 break;
             case SUCCESS_REQUEST:
-                if(!captchaField.getText().toString().equals("")){
+                handleResult("success");
+/*                if(!captchaField.getText().toString().equals("")){
                     textInput.setError(null);
                     DataRequest requestData = new DataRequest(getActivity(),this);
                     requestData.request(DATA_REQUEST,
                     captchaField.getText().toString());
                 } else
-                    textInput.setError("Пустое поле");
+                    textInput.setError("Пустое поле");*/
 
                 break;
         }
@@ -109,15 +113,15 @@ public class CaptchaDialog extends DialogFragment implements View.OnClickListene
             case R.id.cancel_button:
                 dismiss();
                 break;
-            case R.id.refresh_captcha:
+           /* case R.id.refresh_captcha:
                 request(IMAGE_REQUEST);
-                break;
+                break;*/
         }
     }
 
     @Override
     public void setImage(Bitmap bitmap) {
-        captcha.setImageBitmap(bitmap);
+        //captcha.setImageBitmap(bitmap);
     }
 
     @Override

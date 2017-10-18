@@ -20,9 +20,11 @@
         </activity>
         <activity
             android:name=".ui.ResultActivity"
+            android:allowBackup="true"
             android:label="@string/title_activity_result"
             android:parentActivityName=".ui.StartActivity"
-            android:theme="@style/AppTheme">
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ivan.osago.ui.StartActivity" />

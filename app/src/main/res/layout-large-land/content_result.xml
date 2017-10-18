@@ -1,160 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/content_result"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="ivan.osago.ui.ResultActivity"
-    tools:showIn="@layout/activity_result"
-    android:background="#ffffff">
+    >
+    <WebView
+        android:id="@+id/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible" />
+    <!--
 
-    <ScrollView
-        android:layout_width="500dp"
-        android:layout_height="500dp"
-        android:layout_centerInParent="true">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="ivan.osago.ui.ResultActivity"
+        tools:showIn="@layout/activity_result"
+        android:background="#ffffff"-->
+    <!-- <ScrollView
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="vertical" >
 
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:id="@+id/succes_result"
-                android:layout_margin="5dp"
-                android:visibility="gone">
+             <android.support.v7.widget.CardView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_alignParentTop="true"
+                 android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"
+                 android:id="@+id/succes_result"
+                 android:layout_margin="5dp"
+                 android:visibility="gone">
 
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                 <LinearLayout
+                     android:orientation="vertical"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent">
 
-                    <TextView
-                        android:text="Сведения о застрахованном ТС"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/succes_result_title"
-                        android:textStyle="normal|bold"
-                        android:textSize="24sp" />
+                     <TextView
+                         android:text="Сведения о застрахованном ТС"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:id="@+id/succes_result_title"
+                         android:textStyle="normal|bold"
+                         android:textSize="24sp" />
 
-                    <TextView
-                        android:text="Наименование страховщика"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/insurer_name_label"
-                        android:layout_marginTop="5dp" />
+                     <TextView
+                         android:text="Наименование страховщика"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:id="@+id/insurer_name_label"
+                         android:layout_marginTop="5dp" />
 
-                    <TextView
-                        android:text="TextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/insurer_name_result"
-                        android:textSize="18sp" />
+                     <TextView
+                         android:text="TextView"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:id="@+id/insurer_name_result"
+                         android:textSize="18sp" />
 
-                    <TextView
-                        android:text="Государственный регистрационный знак"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/license_plate_label"
-                        android:layout_marginTop="5dp" />
+                     <TextView
+                         android:text="Государственный регистрационный знак"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:id="@+id/license_plate_label"
+                         android:layout_marginTop="5dp" />
 
-                    <TextView
-                        android:text="TextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/license_plate_result"
-                        android:textSize="18sp" />
+                     <TextView
+                         android:text="TextView"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:id="@+id/license_plate_result"
+                         android:textSize="18sp" />
 
-                    <TextView
-                        android:text="VIN"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/vin_label"
-                        android:layout_marginTop="5dp" />
+                     <TextView
+                         android:text="VIN"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:id="@+id/vin_label"
+                         android:layout_marginTop="5dp" />
 
-                    <TextView
-                        android:text="TextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/vin_result"
-                        android:textSize="18sp" />
+                     <TextView
+                         android:text="TextView"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:id="@+id/vin_result"
+                         android:textSize="18sp" />
 
-                    <TextView
-                        android:text="Статус договора ОСАГО на запрашиваемую дату"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/policy_status_label"
-                        android:layout_marginTop="5dp" />
+                     <TextView
+                         android:text="Статус договора ОСАГО на запрашиваемую дату"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:id="@+id/policy_status_label"
+                         android:layout_marginTop="5dp" />
 
-                    <TextView
-                        android:text="TextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/policy_status_result"
-                        android:textSize="18sp" />
+                     <TextView
+                         android:text="TextView"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:id="@+id/policy_status_result"
+                         android:textSize="18sp" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/result_sum"
-                        android:textSize="24sp"
-                        android:textStyle="normal|bold"
-                        android:textAllCaps="true"
-                        android:gravity="center_horizontal"
-                        android:layout_marginTop="5dp" />
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
+                     <TextView
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:id="@+id/result_sum"
+                         android:textSize="24sp"
+                         android:textStyle="normal|bold"
+                         android:textAllCaps="true"
+                         android:gravity="center_horizontal"
+                         android:layout_marginTop="5dp" />
+                 </LinearLayout>
+             </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/succes_result"
-                android:layout_toRightOf="@+id/succes_result"
-                android:layout_toEndOf="@+id/succes_result"
-                android:id="@+id/error_result"
-                android:background="#ff0000">
+             <android.support.v7.widget.CardView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@+id/succes_result"
+                 android:layout_toRightOf="@+id/succes_result"
+                 android:layout_toEndOf="@+id/succes_result"
+                 android:id="@+id/error_result"
+                 android:background="#ff0000">
 
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="visible"
-                    android:background="#ff0000">
+                 <LinearLayout
+                     android:orientation="vertical"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:visibility="visible"
+                     android:background="#ff0000">
 
-                    <TextView
-                        android:text="Ошибка"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/error_result_title"
-                        android:textSize="24sp"
-                        android:textStyle="normal|bold"
-                        android:textColor="#ffffff" />
+                     <TextView
+                         android:text="Ошибка"
+                         android:layout_width="match_parent"
+                         android:la
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"yout_height="wrap_content"
+                         android:id="@+id/error_result_title"
+                         android:textSize="24sp"
+                         android:textStyle="normal|bold"
+                         android:textColor="#ffffff" />
 
-                    <TextView
-                        android:text="TextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/error_message"
-                        android:textSize="18sp"
-                        android:textColor="#ffffff" />
+                     <TextView
+                         android:text="TextView"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:id="@+id/error_message"
+                         android:textSize="18sp"
+                         android:textColor="#ffffff" />
 
-                    <TextView
-                        android:text="TextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/warning_message"
-                        android:textSize="18sp"
-                        android:textColor="#ffffff" />
-                </LinearLayout>
+                     <TextView
+                         android:text="TextView"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:id="@+id/warning_message"
+                         android:textSize="18sp"
+                         android:textColor="#ffffff" />
+                 </LinearLayout>
 
-            </android.support.v7.widget.CardView>
+             </android.support.v7.widget.CardView>
 
-        </RelativeLayout>
-    </ScrollView>
-</RelativeLayout>
+         </RelativeLayout>
+     </ScrollView>-->
+
+</LinearLayout>

@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -18,7 +20,7 @@ import ivan.osago.Result;
 
 public class ResultActivity extends AppCompatActivity {
 
-    @BindView(R.id.insurer_name_result)
+/*    @BindView(R.id.insurer_name_result)
     TextView insurerName;//наименвоание страховщика
     @BindView(R.id.license_plate_result)
     TextView licensePlate;//Государственный регистрационный знак
@@ -36,7 +38,9 @@ public class ResultActivity extends AppCompatActivity {
     @BindView(R.id.error_result)
     CardView errorPlate;
     @BindView(R.id.succes_result)
-    CardView succesPlate;
+    CardView succesPlate;*/
+    @BindView(R.id.web_view)
+    WebView webView;
 
     Result result;
 
@@ -46,14 +50,19 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
         ButterKnife.bind(this);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setTitle("Результат");
+        webView = (WebView)findViewById(R.id.web_view);
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webView.loadUrl("https://dkbm-web.autoins.ru/dkbm-web-1.0/osagovehicle.htm");
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+/*        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("Результат");*/
+
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         
-            result = new Result(getIntent().getExtras().getString("result"));
-        getResult();
+        //result = new Result(getIntent().getExtras().getString("result"));
+        //getResult();
     }
 
     @Override
@@ -62,7 +71,7 @@ public class ResultActivity extends AppCompatActivity {
 
     }
 
-    public void getResult() {
+  /*  public void getResult() {
 
         if (result.errorId != 0  || result.insurerName.equals("null")){
             succesPlate.setVisibility(View.GONE);
@@ -88,12 +97,12 @@ public class ResultActivity extends AppCompatActivity {
             vin.setText(result.vin);
             resultSum.setText("Сумма: "+Application.getInstancce().getResult());
         }
-    }
+    }*/
 
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
-        outState.putString("result",result.result);
+        //outState.putString("result",result.result);
     }
 
 }

@@ -9,7 +9,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="security_code">Подтверждение кода безопасности</string>
+    <string name="security_code">Результат подсчитан, хотите проверить серийный номер?</string>
     <string name="captcha_help">Введите символы с изображения</string>
 
     <string-array name="term_insurance_array_entires">
