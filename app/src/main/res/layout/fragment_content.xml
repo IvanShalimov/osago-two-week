@@ -39,7 +39,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/cancellation_date_field"
+                        android:id="@+id/policy_beginning_field"
                         android:textSize="24sp"
                         android:text="test"
                         android:gravity="center_horizontal"
@@ -60,7 +60,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/policy_beginning_field"
+                        android:id="@+id/cancellation_date_field"
                         android:textSize="24sp"
                         android:text="test"
                         android:gravity="center_horizontal"

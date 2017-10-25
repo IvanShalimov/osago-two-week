@@ -26,19 +26,20 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                     <TextView
-                        android:text="Начало полиса"
+                        android:id="@+id/cancellation_date_label"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/cancellation_date_label"
-                        tools:ignore="HardcodedText"
                         android:layout_marginTop="5dp"
-                        android:gravity="center_horizontal" />
+                        android:gravity="center_horizontal"
+                        android:text="Начало полиса"
+                        tools:ignore="HardcodedText" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/cancellation_date_field"
+                        android:id="@+id/policy_beginning_field"
                         android:textSize="24sp"
                         android:text="test"
                         android:gravity="center_horizontal"
@@ -48,18 +49,18 @@
                         android:textStyle="normal|bold" />
 
                     <TextView
-                        android:text="Дата расторжения"
+                        android:id="@+id/policy_beginning_label"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/policy_beginning_label"
-                        tools:ignore="HardcodedText"
+                        android:layout_marginTop="5dp"
                         android:gravity="center_horizontal"
-                        android:layout_marginTop="5dp" />
+                        android:text="Дата расторжения"
+                        tools:ignore="HardcodedText" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/policy_beginning_field"
+                        android:id="@+id/cancellation_date_field"
                         android:textSize="24sp"
                         android:text="test"
                         android:gravity="center_horizontal"

@@ -59,7 +59,7 @@ public class Calculator {
 
     public void setBeginDate(String beginDate) {
         String[] date = beginDate.split("\\.");
-        Log.d("Test","");
+        Log.d("Test",""+beginDate);
         this.beginDate = new DateTime(
                 Integer.valueOf(date[2]),
                 Integer.valueOf(date[1]),
@@ -77,6 +77,7 @@ public class Calculator {
 
     public void setCancelDate(String cancelDate) {
         String[] date = cancelDate.split("\\.");
+        Log.d("Test",""+cancelDate);
         this.cancelDate = new DateTime(
                 Integer.valueOf(date[2]),
                 Integer.valueOf(date[1]),
@@ -87,6 +88,8 @@ public class Calculator {
 
     public double calculate(){
         try {
+            Log.d("Test","RETENTION_FACTOR = "+RETENTION_FACTOR+" amount = "+amount+
+            " amount/365 = "+amount/365+" getBalance() = "+ getBalance());
             double result = (amount/365)*getBalance()*RETENTION_FACTOR;
             return  result;
         }catch(IllegalStateException exception){
@@ -95,8 +98,12 @@ public class Calculator {
     }
 
     int getBalance() throws IllegalStateException {
-        int different = beginDate.getDayOfYear() - cancelDate.getDayOfYear();
-
+        Log.d("Test","beginDate = "+beginDate.monthOfYear().get());
+        Log.d("Test","cancelDate = "+cancelDate.monthOfYear());
+        Log.d("Test","beginDate = "+beginDate.getDayOfYear());
+        Log.d("Test","cancelDate = "+cancelDate.getDayOfYear());
+        int different =cancelDate.getDayOfYear()  - beginDate.getDayOfYear();
+        Log.d("Test","termInsurance = "+termInsurance+" different = "+different);
         switch (termInsurance){
             case 3:
                 different = 91 - different;
