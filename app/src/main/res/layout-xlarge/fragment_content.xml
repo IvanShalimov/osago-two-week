@@ -27,7 +27,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <TextView
-                        android:text="Дата расторжения"
+                        android:text="Начало полиса"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/cancellation_date_label"
@@ -48,7 +48,7 @@
                         android:textStyle="normal|bold" />
 
                     <TextView
-                        android:text="Дата начало полиса"
+                        android:text="Дата расторжения"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/policy_beginning_label"

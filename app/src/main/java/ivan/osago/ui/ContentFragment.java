@@ -35,23 +35,23 @@ View.OnClickListener{
     Presenter presenter;
     CaptchaDialog dialog;
 
-    @BindView(R.id.cancellation_date_field)
+   // @BindView(R.id.cancellation_date_field)
     TextView canceletionDateField;
-    @BindView(R.id.policy_beginning_field)
+  //  @BindView(R.id.policy_beginning_field)
     TextView policyBeginningField;
-    @BindView(R.id.amount_nsurance_field)
+  //  @BindView(R.id.amount_nsurance_field)
     EditText amountInsuranceField;
 /*    @BindView(R.id.policy_number_field)
     EditText policeNumberField;*/
-    @BindView(R.id.term_insurance_spinner)
+   // @BindView(R.id.term_insurance_spinner)
     Spinner termInsuranceSpinner;
 /*    @BindView(R.id.serial_osago)
     Spinner serialOsago;*/
-    @BindView(R.id.calculate_button)
+    //@BindView(R.id.calculate_button)
     Button calculateButton;
 /*    @BindView(R.id.osago_number_input)
     android.support.design.widget.TextInputLayout osagoNumberInput;*/
-    @BindView(R.id.summa_insurance_input)
+    //@BindView(R.id.summa_insurance_input)
     android.support.design.widget.TextInputLayout summaInsuranceInput;
 
     public ContentFragment() {

@@ -103,11 +103,11 @@ public class PresenterImplementation implements Presenter, DatePickerDialog.OnDa
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
         String type = view.getTag();
         if(type.equals("cancel")) {
-            this.view.setCancelText(dayOfMonth+"."+(monthOfYear-1)+"."+year);
+            this.view.setCancelText(dayOfMonth+"."+(monthOfYear+1)+"."+year);
             return;
         }
         if(type.equals("begin")){
-            this.view.setBeginText(dayOfMonth+"."+(monthOfYear-1)+"."+year);
+            this.view.setBeginText(dayOfMonth+"."+(monthOfYear+1)+"."+year);
         }
     }
 }

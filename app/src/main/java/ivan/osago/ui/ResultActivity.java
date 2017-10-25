@@ -1,5 +1,6 @@
 package ivan.osago.ui;
 
+import android.net.http.SslError;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,8 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -39,7 +43,7 @@ public class ResultActivity extends AppCompatActivity {
     CardView errorPlate;
     @BindView(R.id.succes_result)
     CardView succesPlate;*/
-    @BindView(R.id.web_view)
+    //@BindView(R.id.web_view)
     WebView webView;
 
     Result result;
@@ -48,12 +52,19 @@ public class ResultActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+       // requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_result);
+
         ButterKnife.bind(this);
         webView = (WebView)findViewById(R.id.web_view);
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webView.loadUrl("https://dkbm-web.autoins.ru/dkbm-web-1.0/osagovehicle.htm");
+        webView.setWebViewClient(new MyWebViewClient());
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.getSettings().setSupportMultipleWindows(true);
+        webView.setInitialScale(140);
+        webView.loadUrl("https://dkbm-web.autoins.ru/dkbm-web-1.0/osagovehicle.htm");//https://dkbm-web.autoins.ru/dkbm-web-1.0/osagovehicle.htm
 
 /*        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -68,7 +79,6 @@ public class ResultActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
   /*  public void getResult() {
@@ -105,4 +115,18 @@ public class ResultActivity extends AppCompatActivity {
         //outState.putString("result",result.result);
     }
 
+    private class MyWebViewClient extends WebViewClient
+    {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url)
+        {
+            view.loadUrl(url);
+            return true;
+        }
+
+        @Override
+        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+            handler.proceed();
+        }
+    }
 }
