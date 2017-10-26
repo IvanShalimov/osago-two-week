@@ -124,7 +124,11 @@ public class Calculator {
         Log.d("Test","cancelDate = "+cancelDate.monthOfYear());
         Log.d("Test","beginDate = "+beginDate.getDayOfYear());
         Log.d("Test","cancelDate = "+cancelDate.getDayOfYear());
-        int different =cancelDate.getDayOfYear()  - beginDate.getDayOfYear();
+        int mathCancelDate = 0;
+        if(cancelDate.year().get() > beginDate.year().get()){
+            mathCancelDate = 365;
+        }
+        int different =(cancelDate.getDayOfYear()+mathCancelDate) - beginDate.getDayOfYear();
         Log.d("Test","termInsurance = "+termInsurance+" different = "+different);
         switch (termInsurance){
             case 3:
