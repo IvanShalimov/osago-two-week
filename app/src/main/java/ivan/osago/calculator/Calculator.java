@@ -89,12 +89,34 @@ public class Calculator {
     public double calculate(){
         try {
             Log.d("Test","RETENTION_FACTOR = "+RETENTION_FACTOR+" amount = "+amount+
-            " amount/365 = "+amount/365+" getBalance() = "+ getBalance());
-            double result = (amount/365)*getBalance()*RETENTION_FACTOR;
+            " amount/365 = "+amount/getPeriod()+" getBalance() = "+ getBalance());
+            double result = (amount/getPeriod())*getBalance()*RETENTION_FACTOR;
             return  result;
         }catch(IllegalStateException exception){
             return 0;
         }
+    }
+
+    private int getPeriod(){
+        switch (termInsurance) {
+            case 3:
+                return 91;
+            case 4:
+                return 122;
+            case 5:
+                return 152;
+            case 6:
+                return 182;
+            case 7:
+                return 213;
+            case 8:
+                return 243;
+            case 9:
+                return 274;
+            case 12:
+                return 365;
+        }
+        return 1;
     }
 
     int getBalance() throws IllegalStateException {

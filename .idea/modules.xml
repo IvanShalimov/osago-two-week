@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/osago-two-week.iml" filepath="$PROJECT_DIR$/osago-two-week.iml" />
       <module fileurl="file://D:\project\osago-two-week-master\osago-two-week-master\osago-two-week.iml" filepath="D:\project\osago-two-week-master\osago-two-week-master\osago-two-week.iml" />
       <module fileurl="file://$PROJECT_DIR$/osago_repo.iml" filepath="$PROJECT_DIR$/osago_repo.iml" />
     </modules>
